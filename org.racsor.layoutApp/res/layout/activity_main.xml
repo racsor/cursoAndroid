@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/am_tv_insert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/insertText"
+            />
+
+        <EditText
+            android:id="@+id/am_et_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:inputType="numberDecimal"  
+        />
+
+        <TextView
+            android:id="@+id/am_tv_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/tipPercent" />
+
+        <RadioGroup
+            android:id="@+id/am_rg_percent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/am_rb_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/percent10" />
+
+            <RadioButton
+                android:id="@+id/am_rb_15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/percent15" />
+
+            <RadioButton
+                android:id="@+id/am_rb_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/percent18" />
+
+            <RadioButton
+                android:id="@+id/am_rb_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/percent20" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/am_tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tipAmount" />
+
+        <TextView
+            android:id="@+id/am_tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tipTotal" />
+
+        <Spinner
+            android:id="@+id/am_sp_selec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/am_tv_textMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Texto a cambiar" />
+
+        <GridView
+            android:id="@+id/gridView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3" >
+        </GridView>
+
+    </LinearLayout>
+
+</LinearLayout>

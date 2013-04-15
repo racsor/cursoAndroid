@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/ap_mn_hola" android:icon="@android:drawable/ic_menu_camera" android:title="@string/app_mn_hola"></item>
+    <item android:id="@+id/ap_mn_adios" android:icon="@android:drawable/ic_delete" android:title="@string/app_mn_adios"></item>
+    
+
+</menu>

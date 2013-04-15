@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">org.racsor.layoutApp</string>
+    <string name="menu_settings">Settings</string>
+    <string name="insertText">Insert</string>
+    <string name="percent10">10%</string>
+    <string name="percent15">15%</string>
+    <string name="percent18">18%</string>
+    <string name="percent20">20%</string>
+    <string name="tipPercent">Tip percent</string>
+    <string name="tipAmount">Tip Amount:</string>
+    <string name="tipTotal">Total Bill:</string>
+    <string-array name="ap_array_strings_porcentajes">
+        <item>10%</item>
+        <item>15%</item>
+        <item>18%</item>
+        <item>20%</item>
+    </string-array>
+    <integer-array name="ap_array_integer_porcentajes">
+        <item>10</item>
+        <item>15</item>
+        <item>18</item>
+        <item>20</item>
+    </integer-array>
+        <string name="app_mn_hola">hola</string>
+        <string name="app_mn_adios">adios</string>
+
+</resources>
