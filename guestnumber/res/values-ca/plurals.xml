@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+   <plurals name="am_val_intento">
+        <item quantity="zero">Sense intents</item>
+        <item quantity="one">Portes %d intent.</item>
+        <item quantity="other">Portes %d intents.</item>
+    </plurals>
+
+</resources>

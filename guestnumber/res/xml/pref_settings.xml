@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:key="@string/pref_cat_general" >
+        <EditTextPreference
+            android:defaultValue="100"
+            android:dialogMessage="Introduzca el valor máximo"
+            android:dialogTitle="Máximo"
+            android:key="@string/pref_valor_maximo"
+            android:negativeButtonText="Cancelar"
+            android:positiveButtonText="Guardar"
+            android:inputType="number"
+            android:title="Establecer máximo" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

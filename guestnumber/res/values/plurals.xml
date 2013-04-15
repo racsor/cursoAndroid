@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <plurals name="am_val_intento">
+        <item quantity="zero">Sin Intentos</item>
+        <item quantity="one">Llevas %d intento.</item>
+        <item quantity="other">Llevas %d intentos.</item>
+    </plurals>
+
+</resources>
