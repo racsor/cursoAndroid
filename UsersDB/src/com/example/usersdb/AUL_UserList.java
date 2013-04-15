@@ -1,13 +1,15 @@
 package com.example.usersdb;
 
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.Vector;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.drm.DrmStore.Action;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.View;
 
@@ -18,6 +20,7 @@ import com.example.usersdb.usuarios.UsuariosDAO;
 public class AUL_UserList extends Activity {
 	
 	private final static String CT_TAG = "AUL_UserList";
+	public final static String CT_TAG_USER_ID = "userId";
 	SQLiteDatabase mDB;
 	UsuariosDAO mUsuarioDAO;
 
@@ -42,25 +45,34 @@ public class AUL_UserList extends Activity {
 
 	public void hazAccion(View v) {
 		
-		Usuario u = new Usuario();
-		u.setmNombre("Juan");
-		u.setmApellidos("Rodriguez");
-		Calendar c = Calendar.getInstance();
-		c.set(1958,2,28);
-		u.setmFechaNacimiento(c.getTime());
-		
-		long result = mUsuarioDAO.insertar(u);
-		Log.i(CT_TAG,"Usuario insertado con ID:" + result);
+//		Usuario u = new Usuario();
+//		u.setmNombre("Juan");
+//		u.setmApellidos("Rodriguez");
+//		Calendar c = Calendar.getInstance();
+//		c.set(1958,2,28);
+//		u.setmFechaNacimiento(c.getTime());
+//		
+//		long result = mUsuarioDAO.insertar(u);
+//		Log.i(CT_TAG,"Usuario insertado con ID:" + result);
+		Intent i=new Intent(this,ActivityUser.class);
+		i.putExtra(CT_TAG_USER_ID,new String("-1"));
+		startActivity(i);
 		
 		
 	}
+	protected void invocaActivityUser() {
+		Log.d(CT_TAG, "method invocaActivityUser");
+		Intent i=new Intent(this,ActivityUser.class);
+		i.putExtra(CT_TAG_USER_ID,new String("2"));
+		startActivity(i);
+	}
 	
 	public void hazQuery(View v) {
-		
-		Vector<Usuario> vector = mUsuarioDAO.getAll();
-		for (Usuario u : vector){
-			Log.i(CT_TAG,u.toString());
-		}
+//		Vector<Usuario> vector = mUsuarioDAO.getAll();
+//		for (Usuario u : vector){
+//			Log.i(CT_TAG,u.toString());
+//		}
+		invocaActivityUser();
 	}
 	
 	public void hazUpdate(View v){
