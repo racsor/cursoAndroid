@@ -23,6 +23,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -40,9 +41,22 @@ public class MainActivity extends Activity {
 	TextView mTotal;
 	RadioGroup rgPercent;
 	Spinner mSPTips;
+	ListView mLVLista;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.custom_list_view);
+		
+		mLVLista=(ListView)findViewById(R.id.listView1);
+		MyAdapter ad=new MyAdapter(this);
+		mLVLista.setAdapter(ad);
+		
+		
+	};
+	
+	
+	protected void onCreateIncial(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
