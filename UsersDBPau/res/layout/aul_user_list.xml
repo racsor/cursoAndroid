@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".AUL_UserList" >
+
+    <Button
+        android:id="@+id/aul_bt_accion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:onClick="hazAccion"
+        android:text="Acción" />
+
+    <Button
+        android:id="@+id/aul_bt_query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/aul_bt_accion"
+        android:layout_below="@+id/aul_bt_accion"
+        android:layout_marginTop="33dp"
+        android:onClick="hazQuery"
+        android:text="QueryAll" />
+
+</RelativeLayout>
