@@ -1,14 +1,44 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AmtMultiThread" >
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/amt_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="msg1" />
+
+        <TextView
+            android:id="@+id/amt_tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="msg2" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/amt_bt_lento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lento" />
+
+            <Button
+                android:id="@+id/amt_bt_rapido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rapido" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
