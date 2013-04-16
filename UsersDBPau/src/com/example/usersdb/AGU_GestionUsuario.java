@@ -36,7 +36,7 @@ public class AGU_GestionUsuario extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.agu_gestion_usurio);
+		setContentView(R.layout.agu_gestion_usuario);
 		
 		// Mapeo campos
 		mId = (TextView)findViewById(R.id.agu_tv_id);
@@ -145,7 +145,7 @@ public class AGU_GestionUsuario extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.agu__gestion_usurio, menu);
+		getMenuInflater().inflate(R.menu.agu__gestion_usuario, menu);
 		return true;
 	}
 

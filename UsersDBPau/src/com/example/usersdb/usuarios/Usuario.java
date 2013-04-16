@@ -1,6 +1,5 @@
 package com.example.usersdb.usuarios;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import android.text.format.DateFormat;
@@ -37,9 +36,12 @@ public class Usuario {
 	}
 
 	public String getFechaNacimientoString() {
-		if (mFechaNacimiento == null) 
+		return Usuario.getFechaNacimientoString(mFechaNacimiento);
+	}
+	public static String getFechaNacimientoString(Date d) {
+		if (d == null) 
 			return "<<Desconocido>>";
-		return DateFormat.format("dd/MM/yyyy", mFechaNacimiento).toString();
+		return DateFormat.format("dd/MM/yyyy", d).toString();
 	}
 	
 	public String toString() {
