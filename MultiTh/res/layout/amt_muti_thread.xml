@@ -9,39 +9,86 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/amt_tv_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="msg1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/amt_tv_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="msg2" />
+            <Button
+                android:id="@+id/amt_bt_startService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="StartService" />
+
+            <Button
+                android:id="@+id/amt_bt_stopservice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="StopService" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" >
+            android:layout_height="161dp"
+            android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/amt_bt_lento"
+            <TextView
+                android:id="@+id/amt_tv_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lento" />
+                android:text="msg1" />
 
-            <Button
-                android:id="@+id/amt_bt_rapido"
+            <TextView
+                android:id="@+id/amt_tv_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rapido" />
+                android:text="msg2" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/amt_bt_lento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lento" />
+
+                <Button
+                    android:id="@+id/amt_bt_rapido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rapido" />
+
+                <Button
+                    android:id="@+id/amt_bt_async"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AsyncTask" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/amt_bt_async"
+                android:id="@+id/amt_bt_connecta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="AsyncTask" />
+                android:text="Conecta" />
+
+            <Button
+                android:id="@+id/amt_bt_refresca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Refresca" />
+
+            <Button
+                android:id="@+id/amt_bt_desconecta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Desconecta" />
 
         </LinearLayout>
 

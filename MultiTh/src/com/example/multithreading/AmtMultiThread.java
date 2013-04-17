@@ -1,18 +1,27 @@
 package com.example.multithreading;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AmtMultiThread extends Activity {
 	public static final String CT_TAG = "multithreading";
 	int mRegistrosProcesados = 0;
 	TextView mTVMsg1;
 	TextView mTVMsg2;
+	ProcesadorBatch mPB;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +47,122 @@ public class AmtMultiThread extends Activity {
 				funcionAsyncTask();
 			}
 		});
+		findViewById(R.id.amt_bt_startService).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				empezarService();
+			}
+		});
+		findViewById(R.id.amt_bt_stopservice).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				pararService();
+			}
+		});
+		findViewById(R.id.amt_bt_connecta).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				conectaServicio();
+			}
+		});
+		findViewById(R.id.amt_bt_desconecta).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				desconectaServicio();
+			}
+		});
+		findViewById(R.id.amt_bt_refresca).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				refrescaServicio();
+			}
+		});
+	}
+
+	// CONEXION DIRECTA AL SERVICIO
+	ServicioRegistros.RegistrosBinder mConexion = null;
+	ServiceConnection mServicio = new ServiceConnection() {
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			mConexion = (ServicioRegistros.RegistrosBinder) service;
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			mConexion = null;
+		}
+	};
+
+	protected void refrescaServicio() {
+		Log.d(CT_TAG, "refrescaServicio");
+		if (mConexion != null) {
+			if (mConexion.isRunning()) {
+				mTVMsg2.setText("Actualización de servicio (" + mConexion.getPendientes() + "/ " + mConexion.getProcesados() + " )");
+			} else {
+				mTVMsg2.setText("El servicio está parado");
+			}
+		}
+	}
+
+	protected void desconectaServicio() {
+		Log.d(CT_TAG, "desconectaServicio");
+		mTVMsg2.setText("El servicio está desconectado");
+		if (mConexion!=null){
+			unbindService(mServicio);
+		}
+		mConexion = null;
+	}
+
+	protected void conectaServicio() {
+		Log.d(CT_TAG, "conectaServicio");
+		mTVMsg2.setText("El servicio está conectado");
+		bindService(new Intent(this, ServicioRegistros.class), mServicio, BIND_AUTO_CREATE);
+	}
+
+	// FIN CONEXION DIRECTA AL SERVICIO
+	// EJECUCIÓN DEL SERVICIO
+	protected void pararService() {
+		stopService(new Intent(this, ServicioRegistros.class));
+	}
+
+	protected void empezarService() {
+		Intent intent = new Intent(this, ServicioRegistros.class);
+		intent.putExtra(ServicioRegistros.CT_EXTRA_VALORES, 10);
+		startService(intent);
 	}
 
 	private void refrescaRegistros(int i) {
 		mRegistrosProcesados += i;
 		mTVMsg1.setText("Registros procesados: " + mRegistrosProcesados);
 	}
+
+	BroadcastReceiver mReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			mTVMsg2.setText("Actualización de servicio (" + intent.getIntExtra(ServicioRegistros.CT_BROADCAST_PENDIENTES, 0) + "/ "
+					+ intent.getIntExtra(ServicioRegistros.CT_BROADCAST_PROCESADOS, 0) + " )");
+		}
+
+	};
+
+	// me voy a suscribir
+	@Override
+	protected void onStart() {
+		super.onStart();
+		IntentFilter inf = new IntentFilter();
+		inf.addAction(ServicioRegistros.CT_BROADCAST_ACCION);
+		registerReceiver(mReceiver, inf);
+
+	};
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		unregisterReceiver(mReceiver);
+	}
+
+	// FIN SERVICIO
 
 	protected void funcionLenta() {
 		Thread lentorro = new Thread(new Runnable() {
@@ -79,22 +198,26 @@ public class AmtMultiThread extends Activity {
 		return true;
 	}
 
-	class ProcesadorBatch extends AsyncTask<Integer, Integer, Integer> {
+	class ProcesadorBatch extends AsyncTask<Integer, Integer, String> {
 		public static final String CT_TAG = "ProcesadorBatch:AsyncTask";
 
 		@Override
-		protected Integer doInBackground(Integer... params) {
+		protected String doInBackground(Integer... params) {
 			Log.d(CT_TAG, "doInBackground iniciado desde:" + Thread.currentThread().getName());
-			try {
-				for (int i = 0; i < 10; i++) {
-					Thread.sleep(10 * 1000);
+			int ciclos = params[0];
+			int registroCiclo = params[1];
+			Log.d(CT_TAG, "doInBackground ciclos:" + ciclos);
+			for (int i = 0; i < ciclos && !isCancelled(); i++) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				publishProgress(registroCiclo);
 			}
-			publishProgress(100);
+			mPB = null;
 			Log.d(CT_TAG, "doInBackground finalizado desde:" + Thread.currentThread().getName());
-			return null;
+			return isCancelled() ? "Cancelado" : "Finalizado";
 		}
 
 		@Override
@@ -104,7 +227,7 @@ public class AmtMultiThread extends Activity {
 		}
 
 		@Override
-		protected void onPostExecute(Integer result) {
+		protected void onPostExecute(String result) {
 			Log.d(CT_TAG, "onPostExecute invocado desde:" + Thread.currentThread().getName());
 			super.onPostExecute(result);
 		}
@@ -116,11 +239,28 @@ public class AmtMultiThread extends Activity {
 				refrescaRegistros(pro);
 			}
 		}
+
+		@Override
+		protected void onCancelled() {
+			Log.d(CT_TAG, "onCancelled invocado desde:" + Thread.currentThread().getName());
+			super.onCancelled();
+		}
 	}
 
 	protected void funcionAsyncTask() {
-		ProcesadorBatch pb = new ProcesadorBatch();
-		pb.execute(1);
+		if (mPB == null) {
+			mPB = new ProcesadorBatch();
+			mPB.execute(/* numeroclilclos */10,/* muneroregistros */100);
+		}
+		Toast.makeText(this, "La tarea ya está en marcha", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (mPB != null) {
+			mPB.cancel(true);
+		}
 	}
 
 }

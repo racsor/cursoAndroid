@@ -22,6 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="ServicioRegistros"></service>
+        <receiver android:name="MyReceiver">
+            <intent-filter>
+                <action android:name="com.example.multithreading.ServiciosRegistros"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
