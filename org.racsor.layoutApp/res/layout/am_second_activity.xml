@@ -20,4 +20,23 @@
         android:layout_below="@+id/textView1"
         android:text="Button" />
 
+    <Button
+        android:id="@+id/am_bt_traerContactos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="55dp"
+        android:layout_toLeftOf="@+id/button1"
+        android:text="TraerContactos" />
+
+    <Button
+        android:id="@+id/am_bt_crearContacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/am_bt_traerContactos"
+        android:layout_below="@+id/am_bt_traerContactos"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        android:text="CrearContacto" />
+
 </RelativeLayout>
